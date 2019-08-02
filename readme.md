@@ -8,7 +8,7 @@ It's primarily intended for use by [Browninglogic Radio](https://github.com/pfbr
 This is a work in progress in its early stages, thus it's still very incomplete.
 
 ## Running Migrations
-
+In the FavoriteStations.API directory:
 * `dotnet ef migrations add MigrationName`
 * `dotnet ef database update`
 
@@ -20,6 +20,7 @@ This is a work in progress in its early stages, thus it's still very incomplete.
 * CORS
 * JWT Authentication
 * Consistent error responses
+* Model validation
 * Logging
 * Azure Devops build / release pipelines
 * Azure App Service hosting
