@@ -1,3 +1,8 @@
+.vs
+FavoriteStations.API/bin
 FavoriteStations.API/obj
+FavoriteStations.API/Migrations
+FavoriteStations.Tests.Unit/bin
 FavoriteStations.Tests.Unit/obj
+FavoriteStations.Tests.Integration/bin
 FavoriteStations.Tests.Integration/obj
