@@ -13,17 +13,21 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Todo
+* Stations business layer
+  * Access userid from authenticated user
+  * userid mismatch validation
+  * Station mapping
 * Stations CRUD
-* Tags CRUD
-* Station Tags CRUD
-* Swagger
-* CORS
-* JWT Authentication
-* Consistent error responses
 * Model validation
+* CORS
+* Consistent error responses
+* Swagger
 * Logging
 * Azure Devops build / release pipelines
 * Azure App Service hosting
 * Code coverage badge
-* Write tests
+* Versioning
+* Tags CRUD
+* Station Tags CRUD
+* Fill in remaining test coverage
 * Write proper readme
