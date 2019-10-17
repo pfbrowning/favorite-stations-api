@@ -3,7 +3,7 @@ using FavoriteStations.Models;
 using System.Threading.Tasks;
 
 namespace FavoriteStations.Services {
-    public interface IDataLayerService {
+    public interface IDataLayer {
         Task<List<Station>> GetAllStationsForUserAsync(string userId);
         Task<Station> GetStationAsync(int stationId);
         Task<Station> CreateStationAsync(Station station);

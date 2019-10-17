@@ -6,7 +6,7 @@ using FavoriteStations.Models;
 using System.Threading.Tasks;
 
 namespace FavoriteStations.Services {
-    public class DataLayerService: IDataLayerService {
+    public class DataLayerService: IDataLayer {
         private readonly FavoriteStationsContext dbContext;
         public DataLayerService(FavoriteStationsContext dbContext) {
             this.dbContext = dbContext;
