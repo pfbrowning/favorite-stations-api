@@ -19,6 +19,15 @@ namespace FavoriteStations.Services {
             var stations = await this.dataLayer.GetAllStationsForUserAsync(this.user.Sub);
             return this.mapper.Map<List<StationDTO>>(stations);
         }
+        public async Task<StationDTO> CreateStationAsync(StationDTO station) {
+            // Map the DTO to an entity model and add the current user's id
+            var mapped = this.mapper.Map<Station>(station);
+            mapped.UserId = this.user.Sub;
+            // Create the new station in the DB
+            var newStation = await this.dataLayer.CreateStationAsync(mapped);
+            // Map the created station to a DTO and return it
+            return this.mapper.Map<StationDTO>(newStation);
+        }
         public async Task<Either<BusinessOperationFailureReason, StationDTO>> GetStationAsync(int stationId) {
             // Retrieve the station from the database
             var station = await this.dataLayer.GetStationAsync(stationId);
@@ -33,15 +42,6 @@ namespace FavoriteStations.Services {
             else {
                 return Either.Right(this.mapper.Map<StationDTO>(station));
             }
-        }
-        public async Task<StationDTO> CreateStationAsync(StationDTO station) {
-            // Map the DTO to an entity model and add the current user's id
-            var mapped = this.mapper.Map<Station>(station);
-            mapped.UserId = this.user.Sub;
-            // Create the new station in the DB
-            var newStation = await this.dataLayer.CreateStationAsync(mapped);
-            // Map the created station to a DTO and return it
-            return this.mapper.Map<StationDTO>(newStation);
         }
         public async Task<Either<BusinessOperationFailureReason, StationDTO>> UpdateStationAsync(StationDTO station, int stationId) {
             // Retrieve the station from the database

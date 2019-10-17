@@ -17,10 +17,6 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Todo
-* Stations business layer
-  * Access userid from authenticated user
-  * userid mismatch validation
-  * Station mapping
 * BusinessLayer tests
 * Stations CRUD endpoints
 * Model validation
