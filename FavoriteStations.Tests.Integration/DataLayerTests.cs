@@ -9,13 +9,13 @@ using FavoriteStations.Services;
 
 namespace FavoriteStations.Tests.Integration {
     public class DataLayerTests {
-        private readonly DataLayerService dataLayer;
+        private readonly DataLayer dataLayer;
         private readonly FavoriteStationsContext dbContext;
         public DataLayerTests() {
             var builder = new DbContextOptionsBuilder<FavoriteStationsContext>();
             builder.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=favorite-stations;Trusted_Connection=True;");
             this.dbContext = new FavoriteStationsContext(builder.Options);
-            this.dataLayer = new DataLayerService(dbContext);
+            this.dataLayer = new DataLayer(dbContext);
         }
         [Fact]
         public async void ShouldCreateRetrieveAndDeleteAStation() {

@@ -10,16 +10,16 @@ namespace FavoriteStations.Controllers {
     [ApiController]
     [Route("[controller]")]
     public class StationsController : ControllerBase {
-        private readonly IDataLayerService dataLayerService;
+        private readonly IDataLayer dataLayer;
         private readonly User user;
-        public StationsController(IDataLayerService dataLayerService, User user) {
-            this.dataLayerService = dataLayerService;
+        public StationsController(IDataLayer dataLayer, User user) {
+            this.dataLayer = dataLayer;
             this.user = user;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Station>> Get() {
-            return await this.dataLayerService.GetAllStationsForUserAsync(this.user.Sub);
+            return await this.dataLayer.GetAllStationsForUserAsync(this.user.Sub);
         }
     }
 }

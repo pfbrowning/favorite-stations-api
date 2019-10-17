@@ -33,7 +33,7 @@ namespace FavoriteStations.API {
             // Configure a typed User object based on access token claims
             services.AddScoped<User>(s => new User(s.GetService<IHttpContextAccessor>().HttpContext.User));
             
-            services.AddScoped<IDataLayerService, DataLayerService>();
+            services.AddScoped<IDataLayer, DataLayer>();
             
             // Configure JWT Bearer token authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

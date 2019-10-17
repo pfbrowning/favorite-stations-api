@@ -6,9 +6,9 @@ using FavoriteStations.Models;
 using System.Threading.Tasks;
 
 namespace FavoriteStations.Services {
-    public class DataLayerService: IDataLayer {
+    public class DataLayer: IDataLayer {
         private readonly FavoriteStationsContext dbContext;
-        public DataLayerService(FavoriteStationsContext dbContext) {
+        public DataLayer(FavoriteStationsContext dbContext) {
             this.dbContext = dbContext;
         }
         public async Task<List<Station>> GetAllStationsForUserAsync(string userId) {
