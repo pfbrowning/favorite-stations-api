@@ -21,7 +21,8 @@ In the FavoriteStations.API directory:
   * Access userid from authenticated user
   * userid mismatch validation
   * Station mapping
-* Stations CRUD
+* BusinessLayer tests
+* Stations CRUD endpoints
 * Model validation
 * CORS
 * Consistent error responses
