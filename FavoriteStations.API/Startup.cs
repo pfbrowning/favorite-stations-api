@@ -11,6 +11,8 @@ using FavoriteStations.Config;
 using FavoriteStations.Data;
 using FavoriteStations.Services;
 using FavoriteStations.Models;
+using FavoriteStations.Mapping;
+using AutoMapper;
 
 namespace FavoriteStations.API {
     public class Startup {
@@ -34,6 +36,14 @@ namespace FavoriteStations.API {
             services.AddScoped<User>(s => new User(s.GetService<IHttpContextAccessor>().HttpContext.User));
             
             services.AddScoped<IDataLayer, DataLayer>();
+            services.AddScoped<IBusinessLayer, BusinessLayer>();
+
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc => {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            services.AddSingleton(mappingConfig.CreateMapper());
             
             // Configure JWT Bearer token authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
