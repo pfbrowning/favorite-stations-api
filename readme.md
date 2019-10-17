@@ -7,6 +7,10 @@ It's primarily intended for use by [Browninglogic Radio](https://github.com/pfbr
 
 This is a work in progress in its early stages, thus it's still very incomplete.
 
+## Requirements
+* .NET Core 3.0 SDK
+* .NET Ef Tools: `dotnet tool install --global dotnet-ef`
+
 ## Running Migrations
 In the FavoriteStations.API directory:
 * `dotnet ef migrations add MigrationName`
