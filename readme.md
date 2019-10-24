@@ -17,11 +17,10 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Todo
-* BusinessLayer tests
 * Stations CRUD endpoints
 * Model validation
-* CORS
 * Consistent error responses
+* CORS
 * Swagger
 * Logging
 * Azure Devops build / release pipelines
