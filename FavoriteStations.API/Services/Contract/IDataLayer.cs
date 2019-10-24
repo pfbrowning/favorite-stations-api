@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using FavoriteStations.Models;
+using FavoriteStations.Models.Entity;
 using System.Threading.Tasks;
 
 namespace FavoriteStations.Services {

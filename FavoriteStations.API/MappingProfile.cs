@@ -1,11 +1,12 @@
-using FavoriteStations.Models;
+using FavoriteStations.Models.Dto;
+using FavoriteStations.Models.Entity;
 using AutoMapper;
 
 namespace FavoriteStations.Mapping {
     public class MappingProfile : Profile {
         public MappingProfile() {
-            CreateMap<Station, StationDTO>();
-            CreateMap<StationDTO, Station>();
+            CreateMap<Station, StationDto>();
+            CreateMap<StationCreateUpdateDto, Station>();
         }
     }
 }

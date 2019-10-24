@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Microsoft.EntityFrameworkCore;
 using FavoriteStations.Data;
-using FavoriteStations.Models;
+using FavoriteStations.Models.Entity;
 using FavoriteStations.Services;
 
 namespace FavoriteStations.Tests.Integration {

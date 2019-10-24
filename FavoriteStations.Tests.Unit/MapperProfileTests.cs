@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Xunit;
 using FavoriteStations.Mapping;
-using FavoriteStations.Models;
+using FavoriteStations.Models.Dto;
+using FavoriteStations.Models.Entity;
 using AutoMapper;
 
 namespace FavoriteStations.Tests.Unit {
@@ -16,15 +17,31 @@ namespace FavoriteStations.Tests.Unit {
 
         public static IEnumerable<object[]> DummyStationDtos =>
             new List<object[]> {
-                new object[] { new StationDTO() {
+                new object[] { new StationDto() {
                     StationId = 1,
                     Title = "Station 1",
                     Url = "station.com",
                     IconUrl = "icon.com",
                     Notes = "This is a really cool station"
                 }},
-                new object[] { new StationDTO() {
+                new object[] { new StationDto() {
                     StationId = 2,
+                    Title = "Station 2",
+                    Url = "anotherstation.com",
+                    IconUrl = "anothericon.com",
+                    Notes = "This station isn't quite as good"
+                }}
+            };
+
+        public static IEnumerable<object[]> DummyStationCreateUpdateDtos =>
+            new List<object[]> {
+                new object[] { new StationCreateUpdateDto() {
+                    Title = "Station 1",
+                    Url = "station.com",
+                    IconUrl = "icon.com",
+                    Notes = "This is a really cool station"
+                }},
+                new object[] { new StationCreateUpdateDto() {
                     Title = "Station 2",
                     Url = "anotherstation.com",
                     IconUrl = "anothericon.com",
@@ -51,10 +68,10 @@ namespace FavoriteStations.Tests.Unit {
             };
 
         [Theory]
-        [MemberData(nameof(DummyStationDtos))]
-        public void ShouldMapStationDTOToStation(StationDTO station) {
+        [MemberData(nameof(DummyStationCreateUpdateDtos))]
+        public void ShouldMapStationCreateUpdateDtoToStation(StationCreateUpdateDto station) {
             var mapped = this.mapper.Map<Station>(station);
-            Assert.Equal(station.StationId, mapped.StationId);
+            Assert.Equal(null, mapped.StationId);
             Assert.Equal(station.Title, mapped.Title);
             Assert.Equal(station.Url, mapped.Url);
             Assert.Equal(station.IconUrl, mapped.IconUrl);
@@ -63,8 +80,8 @@ namespace FavoriteStations.Tests.Unit {
 
         [Theory]
         [MemberData(nameof(DummyStationEntities))]
-        public void ShouldMapStationToStationDTO(Station station) {
-            var mapped = this.mapper.Map<StationDTO>(station);
+        public void ShouldMapStationToStationDto(Station station) {
+            var mapped = this.mapper.Map<StationDto>(station);
             Assert.Equal(station.StationId, mapped.StationId);
             Assert.Equal(station.Title, mapped.Title);
             Assert.Equal(station.Url, mapped.Url);

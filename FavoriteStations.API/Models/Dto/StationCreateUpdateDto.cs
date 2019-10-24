@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FavoriteStations.Models {
-    public class StationDTO {
-        public int? StationId { get; set; }
+namespace FavoriteStations.Models.Dto {
+    public class StationCreateUpdateDto {
         [MaxLength(255)]
         public string Title { get; set; }
         [Required]

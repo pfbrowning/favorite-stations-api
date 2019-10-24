@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using FavoriteStations.Data;
-using FavoriteStations.Models;
+using FavoriteStations.Models.Entity;
 using System.Threading.Tasks;
 
 namespace FavoriteStations.Services {

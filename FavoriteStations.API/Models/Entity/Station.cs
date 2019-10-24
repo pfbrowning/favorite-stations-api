@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FavoriteStations.Models {
+namespace FavoriteStations.Models.Entity {
     public class Station {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]  

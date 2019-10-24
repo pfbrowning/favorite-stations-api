@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using FavoriteStations.Models;
+using FavoriteStations.Models.Entity;
 
 namespace FavoriteStations.Data {
     public class FavoriteStationsContext : DbContext {
