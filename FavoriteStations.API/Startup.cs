@@ -38,6 +38,8 @@ namespace FavoriteStations.API {
             services.AddScoped<IDataLayer, DataLayer>();
             services.AddScoped<IBusinessLayer, BusinessLayer>();
 
+            services.AddTransient<IBusinessResponseMapper, BusinessResponseMapper>();
+
             // Auto Mapper Configurations
             var mappingConfig = new MapperConfiguration(mc => {
                 mc.AddProfile(new MappingProfile());
