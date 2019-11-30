@@ -19,6 +19,7 @@ In the FavoriteStations.API directory:
 ## Todo
 * Azure Devops build / release pipelines
 * Azure App Service hosting
+* Move test projects into a single project separated by namespace
 * Consistent error responses
 * Business operation response mapping
 * CORS
