@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using FavoriteStations.Models.Dto;
 using FavoriteStations.Services;
+using FavoriteStations.Filters;
 
 namespace FavoriteStations.Controllers {
     [Authorize]
+    [ValidateModel]
     [ApiController]
     [Route("[controller]")]
     public class StationsController : ControllerBase {

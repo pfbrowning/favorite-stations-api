@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,6 +47,10 @@ namespace FavoriteStations.API {
             });
 
             services.AddSingleton(mappingConfig.CreateMapper());
+
+            /* Disable automatic model validation so that we can use our own custom ValidateModelAttribute.
+            https://stackoverflow.com/questions/51125569/net-core-2-1-override-automatic-model-validation */
+            services.Configure<ApiBehaviorOptions>(opts => opts.SuppressModelStateInvalidFilter = true);
             
             // Configure JWT Bearer token authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

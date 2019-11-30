@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace FavoriteStations.Models.Dto {
     public class StationCreateUpdateDto {
         [MaxLength(255)]
+        [Required]
         public string Title { get; set; }
         [Required]
         public string Url { get; set; }
