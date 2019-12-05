@@ -17,8 +17,6 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Todo
-* Azure App Service hosting
-* Logging
 * Unhandled error middleware
 * Move test projects into a single project separated by namespace
 * Consistent error responses
