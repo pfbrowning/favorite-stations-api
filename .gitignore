@@ -2,6 +2,7 @@
 FavoriteStations.API/bin
 FavoriteStations.API/obj
 FavoriteStations.API/Migrations
+FavoriteStations.API/Logs/*
 FavoriteStations.Tests.Unit/bin
 FavoriteStations.Tests.Unit/obj
 FavoriteStations.Tests.Integration/bin

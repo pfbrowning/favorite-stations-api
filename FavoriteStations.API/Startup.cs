@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using FavoriteStations.Config;
 using FavoriteStations.Data;
@@ -14,11 +15,16 @@ using FavoriteStations.Services;
 using FavoriteStations.Models;
 using FavoriteStations.Mapping;
 using AutoMapper;
+using Serilog;
 
 namespace FavoriteStations.API {
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -61,7 +67,7 @@ namespace FavoriteStations.API {
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +77,9 @@ namespace FavoriteStations.API {
             /* Fix default claim mapping because "Microsoft knows best"
             https://leastprivilege.com/2016/08/21/why-does-my-authorize-attribute-not-work/ */
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            // Configure Serilog to listen to the global .NET Core logging pipeline
+            loggerFactory.AddSerilog();
 
             app.UseHttpsRedirection();
 

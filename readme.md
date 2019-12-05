@@ -17,14 +17,14 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Todo
-* Azure Devops build / release pipelines
 * Azure App Service hosting
+* Logging
+* Unhandled error middleware
 * Move test projects into a single project separated by namespace
 * Consistent error responses
 * Business operation response mapping
 * CORS
 * Swagger
-* Logging
 * Code coverage badge
 * Tags CRUD
 * Station Tags CRUD
