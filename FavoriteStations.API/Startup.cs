@@ -14,6 +14,7 @@ using FavoriteStations.Data;
 using FavoriteStations.Services;
 using FavoriteStations.Models;
 using FavoriteStations.Mapping;
+using FavoriteStations.Middlewares;
 using AutoMapper;
 using Serilog;
 
@@ -53,8 +54,8 @@ namespace FavoriteStations.API {
             });
 
             services.AddSingleton(mappingConfig.CreateMapper());
-
-            /* Disable automatic model validation so that we can use our own custom ValidateModelAttribute.
+            
+                        /* Disable automatic model validation so that we can use our own custom ValidateModelAttribute.
             https://stackoverflow.com/questions/51125569/net-core-2-1-override-automatic-model-validation */
             services.Configure<ApiBehaviorOptions>(opts => opts.SuppressModelStateInvalidFilter = true);
             
@@ -63,6 +64,9 @@ namespace FavoriteStations.API {
                 .AddJwtBearer(options => {
                     options.Authority = authConfig.Authority;
                     options.Audience = authConfig.Audience;
+                    options.Events = new JwtBearerEvents() {
+                        OnAuthenticationFailed = c => c.HttpContext.WriteStatusCodePage(401)
+                    };
                 });
         }
         
@@ -93,6 +97,8 @@ namespace FavoriteStations.API {
             {
                 endpoints.MapControllers();
             });
+
+            app.UseStatusCodePages(context => context.HttpContext.WriteStatusCodePage());
         }
     }
 }

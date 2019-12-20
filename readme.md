@@ -19,12 +19,11 @@ In the FavoriteStations.API directory:
 ## Todo
 * Unhandled error middleware
 * Move test projects into a single project separated by namespace
-* Consistent error responses
-* Business operation response mapping
 * CORS
 * Swagger
 * Code coverage badge
+* Business operation response mapping
 * Tags CRUD
 * Station Tags CRUD
-* Fill in remaining test coverage
 * Write proper readme
+* Fill in remaining test coverage
