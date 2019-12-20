@@ -17,7 +17,7 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Todo
-* Unhandled error middleware
+* Clean up middlewares
 * Move test projects into a single project separated by namespace
 * CORS
 * Swagger

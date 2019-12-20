@@ -73,10 +73,7 @@ namespace FavoriteStations.API {
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseExceptionHandler(env.IsDevelopment());
 
             /* Fix default claim mapping because "Microsoft knows best"
             https://leastprivilege.com/2016/08/21/why-does-my-authorize-attribute-not-work/ */
