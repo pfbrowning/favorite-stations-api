@@ -71,7 +71,7 @@ namespace FavoriteStations.Tests.Unit {
         [MemberData(nameof(DummyStationCreateUpdateDtos))]
         public void ShouldMapStationCreateUpdateDtoToStation(StationCreateUpdateDto station) {
             var mapped = this.mapper.Map<Station>(station);
-            Assert.Equal(null, mapped.StationId);
+            Assert.Null(mapped.StationId);
             Assert.Equal(station.Title, mapped.Title);
             Assert.Equal(station.Url, mapped.Url);
             Assert.Equal(station.IconUrl, mapped.IconUrl);

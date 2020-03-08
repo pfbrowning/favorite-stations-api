@@ -80,7 +80,6 @@ namespace FavoriteStations.Tests.Unit {
         }
 
         [Fact]
-        [MemberData(nameof(DummyTestUsers))]
         public async void GetStationAsyncShouldReturnResourceDoesNotExistWhenResourceNotFound() {
             // Arrange: Configure GetStationAsync to return null
             this.dataLayer.GetStationAsync(Arg.Any<int>()).Returns((Station)null);
@@ -242,7 +241,6 @@ namespace FavoriteStations.Tests.Unit {
         }
 
         [Fact]
-        [MemberData(nameof(DummyTestUsers))]
         public async void DeleteStationAsyncShouldReturnResourceDoesNotExistWhenResourceNotFound() {
             // Arrange: Configure GetStationAsync to return null
             this.dataLayer.GetStationAsync(Arg.Any<int>()).Returns((Station)null);
