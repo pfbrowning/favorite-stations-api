@@ -3,7 +3,10 @@ FavoriteStations.API/bin
 FavoriteStations.API/obj
 FavoriteStations.API/Migrations
 FavoriteStations.API/Logs/*
+
 FavoriteStations.Tests.Unit/bin
 FavoriteStations.Tests.Unit/obj
+FavoriteStations.Tests.Unit/coverage.info
+
 FavoriteStations.Tests.Integration/bin
 FavoriteStations.Tests.Integration/obj

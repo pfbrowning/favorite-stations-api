@@ -16,11 +16,14 @@ In the FavoriteStations.API directory:
 * `dotnet ef migrations add MigrationName`
 * `dotnet ef database update`
 
-## Todo
+## Roadmap To 1.0.0
 * Code coverage badge
 * CORS
 * Swagger
 * Business operation response mapping
 * Write proper readme
+
+## Subsequent Goals
+* Don't serialize empty Extensions in ProblemDetails responses
 * Tags CRUD
 * Station Tags CRUD
