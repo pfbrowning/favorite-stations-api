@@ -1,4 +1,5 @@
 # Favorite Stations API
+[![Coverage Status](https://coveralls.io/repos/github/pfbrowning/favorite-stations-api/badge.svg?branch=master)](https://coveralls.io/github/pfbrowning/favorite-stations-api?branch=master)
 
 ## Introduction
 Favorite Stations API is a .NET Core Web API which persists an authenticated user's "favorite" internet radio stations to an underlying SQL Server database via Entity Framework Core.  CRUD operations for station, tag, and station-tag are provided in a RESTful manner.
@@ -17,7 +18,6 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Roadmap To 1.0.0
-* Code coverage badge
 * CORS
 * Swagger
 * Business operation response mapping
