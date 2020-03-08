@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +20,7 @@ using AutoMapper;
 using Serilog;
 
 namespace FavoriteStations.API {
+    [ExcludeFromCodeCoverage]
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;

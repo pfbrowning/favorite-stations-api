@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using FavoriteStations.Models.Entity;
 
 namespace FavoriteStations.Data {
+    [ExcludeFromCodeCoverage]
     public class FavoriteStationsContext : DbContext {
         public DbSet<Station> Stations { get; set; }
         public FavoriteStationsContext(DbContextOptions<FavoriteStationsContext> options): base(options){ }
