@@ -17,12 +17,10 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Todo
-* Move test projects into a single project separated by namespace
 * Code coverage badge
 * CORS
 * Swagger
 * Business operation response mapping
+* Write proper readme
 * Tags CRUD
 * Station Tags CRUD
-* Write proper readme
-* Fill in remaining test coverage
