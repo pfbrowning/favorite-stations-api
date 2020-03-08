@@ -1,4 +1,5 @@
 # Favorite Stations API
+[![Build Status](https://toxicbard.visualstudio.com/Browninglogic%20Radio/_apis/build/status/Favorite%20Stations%20API?branchName=master)](https://toxicbard.visualstudio.com/Browninglogic%20Radio/_build/latest?definitionId=3&branchName=master)
 [![Coverage Status](https://coveralls.io/repos/github/pfbrowning/favorite-stations-api/badge.svg?branch=master)](https://coveralls.io/github/pfbrowning/favorite-stations-api?branch=master)
 
 ## Introduction
