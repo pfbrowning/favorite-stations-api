@@ -25,6 +25,7 @@ In the FavoriteStations.API directory:
 * Write proper readme
 
 ## Subsequent Goals
-* Don't serialize empty Extensions in ProblemDetails responses
 * Tags CRUD
 * Station Tags CRUD
+* Don't serialize empty Extensions in ProblemDetails responses
+* Improve test coverage
