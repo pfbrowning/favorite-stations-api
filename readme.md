@@ -12,14 +12,22 @@ It's primarily intended for use by [Browninglogic Radio](https://github.com/pfbr
 * .NET Ef Tools: `dotnet tool install --global dotnet-ef`
 
 ## Running Migrations
-In the FavoriteStations.API directory:
+You'll need to run EF migrations in order to configure your database before running the API.  In the FavoriteStations.API directory:
 * `dotnet ef migrations add MigrationName`
 * `dotnet ef database update`
 
+## CORS
+TODO Fill this in
+
+## Authentication
+This API is designed to use standard Oauth2 + OpenID Connect bearer token authentication.  You'll need to configure your own identity provider if you want to run your own instance of the API.  It's based on a standard OIDC setup, so it should be fairly straightforward to configure with the following in mind:
+* You'll need your bearer token to be configured as a JWT
+* The API uses the OIDC Standard ["sub" and "iss"](https://openid.net/specs/openid-connect-core-1_0.html#IDToken) claims as a [unique user identifier](https://openid.net/specs/openid-connect-core-1_0.html#ClaimStability), thus you'll need to be sure that these claims are included in your bearer token.
+* I recommend using RS256 and the OIDC metadata endpoint.  Depending on your identity provider of choice, doing this should make configuring the API as simple as configuring an authority and audience within your `appsettings.json`.
+
 ## Roadmap To 1.0.0
-* Business operation response mapping
-* Write proper readme
 * CORS
+* Finish readme
 
 ## Subsequent Goals
 * Tags CRUD
