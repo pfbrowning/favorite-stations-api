@@ -47,7 +47,7 @@ namespace FavoriteStations.API {
             // Add Http Context to the pipeline for DI
             services.AddHttpContextAccessor();
             // Configure a typed User object based on access token claims
-            services.AddScoped<User>(s => new User(s.GetService<IHttpContextAccessor>().HttpContext.User));
+            services.AddScoped<IUser>(s => new User(s.GetService<IHttpContextAccessor>().HttpContext.User));
             
             services.AddScoped<IDataLayer, DataLayer>();
             services.AddScoped<IBusinessLayer, BusinessLayer>();
