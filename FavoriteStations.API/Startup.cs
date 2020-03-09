@@ -82,7 +82,10 @@ namespace FavoriteStations.API {
                     options.Authority = authConfig.Authority;
                     options.Audience = authConfig.Audience;
                     options.Events = new JwtBearerEvents() {
-                        OnAuthenticationFailed = c => c.HttpContext.WriteStatusCodeResponse(401)
+                        OnChallenge = c => {
+                            c.HandleResponse();
+                            return c.HttpContext.WriteStatusCodeResponse(401);
+                        }
                     };
                 });
         }
