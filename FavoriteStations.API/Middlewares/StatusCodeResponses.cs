@@ -9,7 +9,7 @@ using Serilog;
 namespace FavoriteStations.Middlewares {
     public static class StatusCodeResponses {
         public static Task WriteStatusCodeResponse(this HttpContext context, int? statusCode = null) {
-            Log.Information("Writing Status Code Response", statusCode, context.Response.StatusCode, context.Response.HasStarted);
+            Log.Information("Writing Status Code Response | specified: {0} | context: {1} | hasStarted: {2}", statusCode, context.Response.StatusCode, context.Response.HasStarted);
             
             context.Response.ContentType = "application/json";
 
