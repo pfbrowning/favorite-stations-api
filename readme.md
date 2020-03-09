@@ -7,10 +7,8 @@ Favorite Stations API is a .NET Core Web API which persists an authenticated use
 
 It's primarily intended for use by [Browninglogic Radio](https://github.com/pfbrowning/ng-radio), but it's intentionally decoupled in order to be of use to any other consumers which might also find it useful.
 
-This is a work in progress in its early stages, thus it's still very incomplete.
-
 ## Requirements
-* .NET Core 3.0 SDK
+* .NET Core 3.1 SDK
 * .NET Ef Tools: `dotnet tool install --global dotnet-ef`
 
 ## Running Migrations
@@ -19,7 +17,6 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Roadmap To 1.0.0
-* Users table: sub + iss identifier
 * Business operation response mapping
 * Write proper readme
 * CORS

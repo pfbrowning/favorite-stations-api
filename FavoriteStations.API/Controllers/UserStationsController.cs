@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using FavoriteStations.Models.Dto;
+using FavoriteStations.Extensions;
 using FavoriteStations.Services;
 using FavoriteStations.Filters;
 
@@ -17,11 +18,9 @@ namespace FavoriteStations.Controllers {
     [Route("[controller]")]
     public class UserStationsController : ControllerBase {
         private readonly IBusinessLayer businessLayer;
-        private readonly IBusinessResponseMapper businessResponseMapper;
 
-        public UserStationsController(IBusinessLayer businessLayer, IBusinessResponseMapper businessResponseMapper) {
+        public UserStationsController(IBusinessLayer businessLayer) {
             this.businessLayer = businessLayer;
-            this.businessResponseMapper = businessResponseMapper;
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace FavoriteStations.Controllers {
             var result = await this.businessLayer.GetStationAsync(id);
             return result.Match<IActionResult>(
                 success => Ok(result.RightValue),
-                failure => this.businessResponseMapper.ToActionResult(failure)
+                failure => failure.ToActionResult()
             );
         }
 
@@ -81,7 +80,7 @@ namespace FavoriteStations.Controllers {
             var result = await this.businessLayer.UpdateStationAsync(update, id);
             return result.Match<IActionResult>(
                 success => Ok(result.RightValue),
-                failure => this.businessResponseMapper.ToActionResult(failure)
+                failure => failure.ToActionResult()
             );
         }
 
@@ -100,7 +99,7 @@ namespace FavoriteStations.Controllers {
             var result = await this.businessLayer.DeleteStationAsync(id);
             return result.Match<IActionResult>(
                 success => NoContent(),
-                failure => this.businessResponseMapper.ToActionResult(failure)
+                failure => failure.ToActionResult()
             );
         }
     }
