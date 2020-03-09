@@ -1,15 +1,19 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 
 namespace FavoriteStations.Models {
-    [ExcludeFromCodeCoverage]
-    public class User {
-        public User(string sub) {
-            this.Sub = sub;
-        }
+    public class User : IUser {
         public User(ClaimsPrincipal claimsPrincipal) {
-            this.Sub = claimsPrincipal.FindFirstValue("sub");
+            this.Subject = claimsPrincipal.FindFirstValue("sub");
+            this.Issuer = claimsPrincipal.FindFirstValue("iss");
         }
-        public readonly string Sub;
+        public readonly string Subject;
+        public readonly string Issuer;
+
+        // https://openid.net/specs/openid-connect-core-1_0.html#ClaimStability
+        public string UniqueId {
+            get {
+                return $"{this.Subject}|{this.Issuer}";
+            }
+        }
     }
 }

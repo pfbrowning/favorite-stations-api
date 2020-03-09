@@ -10,21 +10,21 @@ using Here;
 namespace FavoriteStations.Services {
     public class BusinessLayer: IBusinessLayer {
         private readonly IDataLayer dataLayer;
-        private readonly User user;
+        private readonly IUser user;
         private readonly IMapper mapper;
-        public BusinessLayer(IDataLayer dataLayer, User user, IMapper mapper) {
+        public BusinessLayer(IDataLayer dataLayer, IUser user, IMapper mapper) {
             this.dataLayer = dataLayer;
             this.user = user;
             this.mapper = mapper;
         }
         public async Task<List<StationDto>> GetAllStations() {
-            var stations = await this.dataLayer.GetAllStationsForUserAsync(this.user.Sub);
+            var stations = await this.dataLayer.GetAllStationsForUserAsync(this.user.UniqueId);
             return this.mapper.Map<List<StationDto>>(stations);
         }
         public async Task<StationDto> CreateStationAsync(StationCreateUpdateDto station) {
             // Map the DTO to an entity model and add the current user's id
             var mapped = this.mapper.Map<Station>(station);
-            mapped.UserId = this.user.Sub;
+            mapped.UserId = this.user.UniqueId;
             // Create the new station in the DB
             var newStation = await this.dataLayer.CreateStationAsync(mapped);
             // Map the created station to a DTO and return it
@@ -37,7 +37,7 @@ namespace FavoriteStations.Services {
             if(station == null) {
                 return Either.Left(BusinessOperationFailureReason.ResourceDoesNotExist);
             }
-            if(station.UserId != this.user.Sub) {
+            if(station.UserId != this.user.UniqueId) {
                 return Either.Left(BusinessOperationFailureReason.ResourceDoesNotBelongToCurrentUser);
             }
             // If the station was found and is associated with the current user, then map it and return it
@@ -52,7 +52,7 @@ namespace FavoriteStations.Services {
             if(existing == null) {
                 return Either.Left(BusinessOperationFailureReason.ResourceDoesNotExist);
             }
-            else if(existing.UserId != this.user.Sub) {
+            else if(existing.UserId != this.user.UniqueId) {
                 return Either.Left(BusinessOperationFailureReason.ResourceDoesNotBelongToCurrentUser);
             }
             // Apply the values from the provided DTO to the existing entity model
@@ -69,7 +69,7 @@ namespace FavoriteStations.Services {
             if(existing == null) {
                 return Either.Left(BusinessOperationFailureReason.ResourceDoesNotExist);
             }
-            else if(existing.UserId != this.user.Sub) {
+            else if(existing.UserId != this.user.UniqueId) {
                 return Either.Left(BusinessOperationFailureReason.ResourceDoesNotBelongToCurrentUser);
             }
             // Delete the station

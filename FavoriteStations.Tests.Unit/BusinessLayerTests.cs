@@ -12,12 +12,12 @@ using DeepEqual.Syntax;
 
 namespace FavoriteStations.Tests.Unit {
     public class BusinessLayerTests {
-        private User user;
+        private UserStub user;
         private IBusinessLayer businessLayer;
         private readonly IMapper mapper;
         private readonly IDataLayer dataLayer;
         public BusinessLayerTests() {
-            this.user = new User("Dummy Test User");
+            this.user = new UserStub("Dummy Test User");
             var mappingConfig = new MapperConfiguration(mc => {
                 mc.AddProfile(new MappingProfile());
             });
@@ -27,9 +27,9 @@ namespace FavoriteStations.Tests.Unit {
         }
         public static IEnumerable<object[]> DummyTestUsers =>
             new List<object[]> {
-                new object[] { new User("Test User 1") },
-                new object[] { new User("Test User 2") },
-                new object[] { new User("Another Test User") }
+                new object[] { new UserStub("Test User 1") },
+                new object[] { new UserStub("Test User 2") },
+                new object[] { new UserStub("Another Test User") }
             };
         public static IEnumerable<object[]> DummyUserMatchEntries =>
             new List<object[]> {
@@ -38,45 +38,28 @@ namespace FavoriteStations.Tests.Unit {
                 new object[] { "user", "user", true },
                 new object[] { "user     ", "user", false }
             };
-
-        // public static IEnumerable<object[]> DummyNewStationDtos =>
-        //     new List<object[]> {
-        //         new object[] { new StationDTO() {
-        //             Title = "Station 1",
-        //             Url = "station.com",
-        //             IconUrl = "icon.com",
-        //             Notes = "This is a really cool station"
-        //         }},
-        //         new object[] { new StationDTO() {
-        //             Title = "Station 2",
-        //             Url = "anotherstation.com",
-        //             IconUrl = "anothericon.com",
-        //             Notes = "This station isn't quite as good"
-        //         }}
-        //     };
             
         [Theory]
         [MemberData(nameof(DummyTestUsers))]
-        public async void SouldGetAllStationsForCurrentUser(User user) {
+        public async void SouldGetAllStationsForCurrentUser(UserStub user) {
             // Arrange: Init the business layer with the provided user
             this.businessLayer = new BusinessLayer(this.dataLayer, user, this.mapper);
             // Act: Perform GetAllStations
             await this.businessLayer.GetAllStations();
             // Assert that the proper user id was passed to GetAllStationsForUserAsync
-            await this.dataLayer.Received(1).GetAllStationsForUserAsync(user.Sub);
+            await this.dataLayer.Received(1).GetAllStationsForUserAsync(user.UniqueId);
         }
-
             
         [Theory]
         [MemberData(nameof(DummyTestUsers))]
-        public async void ShouldApplyTheCurrentUserIdToNewStations(User user) {
+        public async void ShouldApplyTheCurrentUserIdToNewStations(UserStub user) {
             // Arrange: Init the businesslayer with the provided user & create a dummy StationDTO
             this.businessLayer = new BusinessLayer(this.dataLayer, user, this.mapper);
             var newStation = new StationCreateUpdateDto() { Title = "New Station" };
             // Act: Create the station
             await this.businessLayer.CreateStationAsync(newStation);
             // Assert that the station was created with the provided UserId
-            await this.dataLayer.Received(1).CreateStationAsync(Arg.Is<Station>(s => s.UserId == user.Sub));
+            await this.dataLayer.Received(1).CreateStationAsync(Arg.Is<Station>(s => s.UserId == user.UniqueId));
         }
 
         [Fact]
@@ -99,7 +82,7 @@ namespace FavoriteStations.Tests.Unit {
             // Configure GetStationAsync to return the provided returnedUser
             this.dataLayer.GetStationAsync(Arg.Any<int>()).Returns(new Station() { UserId = returnedUser });
             // Create the provided currentUser
-            this.user = new User(currentUser);
+            this.user = new UserStub(currentUser);
             // Re-initialize the business layer so that it takes the new user object
             this.businessLayer = new BusinessLayer(this.dataLayer, this.user, this.mapper);
 
@@ -122,8 +105,8 @@ namespace FavoriteStations.Tests.Unit {
             // Configure GetStationAsync to return a Station for user "user"
             var station = new Station() { UserId = "user" };
             this.dataLayer.GetStationAsync(Arg.Any<int>()).Returns(station);
-            // Set the current user with sub of "user"
-            this.user = new User("user");
+            // Set the current user 
+            this.user = new UserStub("user");
             // Re-initialize the business layer so that it takes the new user object
             this.businessLayer = new BusinessLayer(this.dataLayer, this.user, this.mapper);
 
@@ -155,7 +138,7 @@ namespace FavoriteStations.Tests.Unit {
             // Configure GetStationAsync to return the provided returnedUser
             this.dataLayer.GetStationAsync(Arg.Any<int>()).Returns(new Station() { UserId = returnedUser });
             // Create the provided currentUser
-            this.user = new User(currentUser);
+            this.user = new UserStub(currentUser);
             // Re-initialize the business layer so that it takes the new user object
             this.businessLayer = new BusinessLayer(this.dataLayer, this.user, this.mapper);
 
@@ -260,7 +243,7 @@ namespace FavoriteStations.Tests.Unit {
             // Configure GetStationAsync to return the provided returnedUser
             this.dataLayer.GetStationAsync(Arg.Any<int>()).Returns(new Station() { UserId = returnedUser });
             // Create the provided currentUser
-            this.user = new User(currentUser);
+            this.user = new UserStub(currentUser);
             // Re-initialize the business layer so that it takes the new user object
             this.businessLayer = new BusinessLayer(this.dataLayer, this.user, this.mapper);
 
@@ -283,8 +266,8 @@ namespace FavoriteStations.Tests.Unit {
             // Configure GetStationAsync to return a Station for user "user"
             var station = new Station() { UserId = "user" };
             this.dataLayer.GetStationAsync(Arg.Any<int>()).Returns(station);
-            // Set the current user with sub of "user"
-            this.user = new User("user");
+            // Set the current user
+            this.user = new UserStub("user");
             // Re-initialize the business layer so that it takes the new user object
             this.businessLayer = new BusinessLayer(this.dataLayer, this.user, this.mapper);
 
