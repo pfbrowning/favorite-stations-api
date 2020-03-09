@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace FavoriteStations.Middlewares {
     public static class StatusCodeResponses {
         public static Task WriteStatusCodeResponse(this HttpContext context, int? statusCode = null) {
+            Log.Information("Writing Status Code Response", statusCode, context.Response.StatusCode, context.Response.HasStarted);
+            
             context.Response.ContentType = "application/json";
 
             if(!statusCode.HasValue) {
