@@ -19,10 +19,11 @@ In the FavoriteStations.API directory:
 * `dotnet ef database update`
 
 ## Roadmap To 1.0.0
-* CORS
 * Swagger
 * Business operation response mapping
 * Write proper readme
+* Users table: sub + iss identifier
+* CORS
 
 ## Subsequent Goals
 * Tags CRUD

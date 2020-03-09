@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using FavoriteStations.Config;
 using FavoriteStations.Data;
 using FavoriteStations.Services;
@@ -56,6 +57,8 @@ namespace FavoriteStations.API {
             });
 
             services.AddSingleton(mappingConfig.CreateMapper());
+
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Favorite Stations API", Version = "v1" }); });
             
             /* Disable automatic model validation so that we can use our own custom ValidateModelAttribute.
             https://stackoverflow.com/questions/51125569/net-core-2-1-override-automatic-model-validation */
@@ -83,6 +86,9 @@ namespace FavoriteStations.API {
 
             // Configure Serilog to listen to the global .NET Core logging pipeline
             loggerFactory.AddSerilog();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Favorite Stations API V1"); });
 
             app.UseHttpsRedirection();
 
