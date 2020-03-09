@@ -15,11 +15,11 @@ namespace FavoriteStations.Controllers {
     [ValidateModel]
     [ApiController]
     [Route("[controller]")]
-    public class StationsController : ControllerBase {
+    public class UserStationsController : ControllerBase {
         private readonly IBusinessLayer businessLayer;
         private readonly IBusinessResponseMapper businessResponseMapper;
 
-        public StationsController(IBusinessLayer businessLayer, IBusinessResponseMapper businessResponseMapper) {
+        public UserStationsController(IBusinessLayer businessLayer, IBusinessResponseMapper businessResponseMapper) {
             this.businessLayer = businessLayer;
             this.businessResponseMapper = businessResponseMapper;
         }
