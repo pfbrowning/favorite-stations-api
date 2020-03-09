@@ -1,5 +1,8 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -58,7 +61,18 @@ namespace FavoriteStations.API {
 
             services.AddSingleton(mappingConfig.CreateMapper());
 
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Favorite Stations API", Version = "v1" }); });
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "Favorite Stations API",
+                    Description = "A simple RESTful CRUD api used to persist users' favorite internet radio stations",
+                    Version = "v1"
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+            });
             
             /* Disable automatic model validation so that we can use our own custom ValidateModelAttribute.
             https://stackoverflow.com/questions/51125569/net-core-2-1-override-automatic-model-validation */
@@ -88,7 +102,10 @@ namespace FavoriteStations.API {
             loggerFactory.AddSerilog();
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Favorite Stations API V1"); });
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Favorite Stations API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 
