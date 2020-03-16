@@ -39,7 +39,20 @@ namespace FavoriteStations.API {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             IConfigurationSection authConfigSection = Configuration.GetSection("Authentication");
+            IConfigurationSection corsConfigSection = Configuration.GetSection("Cors");
             AuthConfig authConfig = authConfigSection.Get<AuthConfig>();
+            CorsConfig corsConfig = corsConfigSection.Get<CorsConfig>();
+
+            // Configure CORS based on the origins specified in our configuration
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .WithOrigins(corsConfig.AllowedCorsOrigins)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials() );
+            });
 
             services.AddControllers();
             // Configure EF DB Context
@@ -101,6 +114,8 @@ namespace FavoriteStations.API {
 
             // Configure Serilog to listen to the global .NET Core logging pipeline
             loggerFactory.AddSerilog();
+            
+            app.UseCors("CorsPolicy");
 
             app.UseSwagger();
             app.UseSwaggerUI(c => {
