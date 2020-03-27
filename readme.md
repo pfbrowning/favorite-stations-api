@@ -26,6 +26,7 @@ This API is designed to use standard Oauth2 + OpenID Connect bearer token authen
 * I recommend using RS256 and the OIDC metadata endpoint.  Depending on your identity provider of choice, doing this should make configuring the API as simple as configuring an authority and audience within your `appsettings.json`.
 
 ## Backlog
+* Url format validation
 * Tags CRUD
 * Station Tags CRUD
 * Don't serialize empty Extensions in ProblemDetails responses
