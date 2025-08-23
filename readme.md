@@ -27,7 +27,9 @@ This API is designed to use standard Oauth2 + OpenID Connect bearer token authen
 
 ## Backlog
 * Url format validation
+* OWASP 10
+* Refactoring
+* Don't serialize empty Extensions in ProblemDetails responses
 * Tags CRUD
 * Station Tags CRUD
-* Don't serialize empty Extensions in ProblemDetails responses
 * Improve test coverage
